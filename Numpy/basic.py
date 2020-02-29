@@ -120,6 +120,7 @@ def practice5():
     print(a[..., 1:])  # 取列
     print(a[..., 1:3])  # 取列
     print(a[1:, ...])  # 取行
+    print(a)
 
 
 if __name__ == '__main__':
