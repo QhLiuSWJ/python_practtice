@@ -5,13 +5,6 @@
 @time:2020/03/02
 """
 
-# -*- coding: UTF-8 -*-
-"""
-@author:QHL
-@file:手写识别.py
-@time:2020/03/02
-"""
-
 import numpy as np
 import paddle as paddle
 import paddle.fluid as fluid
@@ -112,12 +105,20 @@ def load_image(file):
     return im
 
 
-img = Image.open('6.png')
+img = Image.open('5.png')
 plt.imshow(img)  # 根据数组绘制图像
 plt.show()  # 显示图像
 
+# In[ ]:
+
+
 infer_exe = fluid.Executor(place)
 inference_scope = fluid.core.Scope()
+
+# 最后把图像转换成一维向量并进行预测，数据从feed中的image传入。fetch_list的值是网络模型的最后一层分类器，所以输出的结果是10个标签的概率值，这些概率值的总和为1。
+
+# In[ ]:
+
 
 # 加载数据并开始预测
 with fluid.scope_guard(inference_scope):
@@ -126,16 +127,22 @@ with fluid.scope_guard(inference_scope):
     [inference_program,  # 推理Program
      feed_target_names,  # 是一个str列表，它包含需要在推理 Program 中提供数据的变量的名称。
      fetch_targets] = fluid.io.load_inference_model(model_save_dir,
-                                                    infer_exe)
-    # fetch_targets：是一个 Variable 列表，从中我们可以得到推断结果。model_save_dir：模型保存的路径
-    # infer_exe: 运行 inference model的 executor
-    img = load_image('6.png')
+                                                    # fetch_targets：是一个 Variable 列表，从中我们可以得到推断结果。model_save_dir：模型保存的路径
+                                                    infer_exe)  # infer_exe: 运行 inference model的 executor
+    img = load_image('5.png')
 
     results = exe.run(program=inference_program,  # 运行推测程序
                       feed={feed_target_names[0]: img},  # 喂入要预测的img
                       fetch_list=fetch_targets)  # 得到推测结果,
 
+    for number, acc in enumerate(results[0][0]):
+        print(f'是{number}的概率为：{acc * 100:.5f}%')
+# 拿到每个标签的概率值之后，我们要获取概率最大的标签，并打印出来。
+
+# In[ ]:
+print(results)
 # 获取概率最大的label
 lab = np.argsort(results)  # argsort函数返回的是result数组值从小到大的索引值
 # print(lab)
 print("该图片的预测结果的label为: %d" % lab[0][0][-1])  # -1代表读取数组中倒数第一列
+print()
