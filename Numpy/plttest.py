@@ -17,5 +17,6 @@ area = (20 * x) ** 2
 plt.scatter(x, y, s=area, alpha=0.5)
 plt.show()
 
+
 # if __name__ == '__main__':
 #    pass
