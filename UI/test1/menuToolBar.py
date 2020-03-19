@@ -5,8 +5,9 @@
 @time:2020/03/19
 """
 import sys
-from PyQt5.QtWidgets import QMainWindow, QApplication,QAction,qApp
+from PyQt5.QtWidgets import QMainWindow, QApplication, QAction, qApp
 from PyQt5.QtGui import QIcon
+
 
 class Example(QMainWindow):
     def __init__(self):
@@ -17,7 +18,7 @@ class Example(QMainWindow):
         self.statusBar().showMessage("Ready")
 
         self.setWindowTitle('StatusBar')
-        exitAct = QAction(QIcon('test.jpg'),'&Exit',self)
+        exitAct = QAction(QIcon('test.jpg'), '&Exit', self)
         exitAct.setShortcut('Ctrl+Q')
         exitAct.setStatusTip('Exit application')
         exitAct.triggered.connect(qApp.quit)
