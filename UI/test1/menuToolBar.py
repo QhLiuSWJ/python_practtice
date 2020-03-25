@@ -35,7 +35,6 @@ class Example(QMainWindow):
         fileMenu.addAction(exitAct1)
 
         self.setGeometry(300, 300, 250, 150)
-
         self.show()
 
 

@@ -5,16 +5,17 @@
 @time:2020/03/19
 """
 import sys
-
+import server
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPalette, QPixmap
-from PyQt5.QtWidgets import QApplication, QLabel, QWidget, QVBoxLayout, QPushButton
+from PyQt5.QtWidgets import QApplication,QMainWindow, QLabel, QWidget, QVBoxLayout, QPushButton
 
 
 class QLabelDemo(QWidget):
     def __init__(self):
         super().__init__()
         self.initUI()
+
 
     def initUI(self):
         label1 = QLabel(self)
